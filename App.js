@@ -9,6 +9,7 @@
 import React from 'react';
 import type { Node } from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -28,8 +29,12 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const [documents, error] = useDocuments();
+  const { documents, error, callApi } = useDocuments();
   console.log("documents:", documents);
+
+  const handleButton = () => {
+    callApi("documents")
+  }
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -37,6 +42,7 @@ const App: () => Node = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle} />
+      <Button onPress={handleButton} title="fetchData"></Button>
     </SafeAreaView>
   );
 };

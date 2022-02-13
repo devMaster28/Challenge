@@ -1,31 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState, useRef } from "react";
 
 export const BASE_URL = 'https://localhost:8080';
 
 const useDocuments = () => {
-  const [documents, setDocuments] = useState([]);
-  const [error, setError] = useState(null);
+  const firstUpdate = useRef(true);
+  const [error, setError] = useState(false);
+  const [page, setpPage] = useState("");
+  const [documents, setDocuments] = useState(null);;
 
   useEffect(() => {
-    fetch('http://localhost:8080/documents', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }).then(async response => {
-      if (response.ok) {
-        setDocuments(await response.json());
-      } else {
-        setError(await response.text());
-      }
-    })
-      .catch(err => {
-        setError(err.message);
-      });
-  }, []);
+    console.log(firstUpdate)
+    if (!firstUpdate.current) {
+      fetch('http://localhost:8080/' + page, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }).then(async response => {
+        console.log("entra")
+        if (response.ok) {
+          setDocuments(await response.json());
+        } else {
+          console.log("error response")
 
-  return documents;
+          setError(await response.text());
+        }
+      })
+        .catch(err => {
+          console.log(err.message)
+          setError(err.message);
+        });
+    }
+    firstUpdate.current = false;
+  },
+    [page]);
+
+  return { documents, error, callApi: setpPage };
 };
 
 export default useDocuments;
+
