@@ -3,7 +3,6 @@ import React from 'react';
 
 function ListDocument(props) {
 
-
     const documents = props.documents
     return (
         <View >
@@ -22,10 +21,9 @@ function ListDocument(props) {
 export default ListDocument
 
 
-export function ItemListComponent(props) {
+function ItemListComponent(props) {
 
     const document = props.document
-    console.log(document)
     return <View style={itemListStyle.container}>
         <View style={{ flexDirection: 'row' }}>
             <Text style={itemListStyle.titleStyle}>{document.Title}</Text>

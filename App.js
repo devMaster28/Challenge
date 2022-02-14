@@ -21,7 +21,7 @@ import {
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import useDocuments from './src/hooks/useDocuments';
-import ListDocument from './src/Components/ListDocument';
+import DocumentsPage from './src/features/Documents/DocumentsPage';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -31,7 +31,7 @@ const App: () => Node = () => {
   };
 
   const { documents, error, callApi } = useDocuments();
-  console.log("documents:", documents);
+  console.log("newDocuments:", documents);
 
   const handleButton = () => {
     callApi("documents")
@@ -44,7 +44,7 @@ const App: () => Node = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle} >
-        {hasDocuments && <ListDocument documents={documents}></ListDocument>}
+        {hasDocuments && <DocumentsPage documents={documents}></DocumentsPage>}
 
         <Button onPress={handleButton} title="fetchData"></Button>
       </ScrollView>
