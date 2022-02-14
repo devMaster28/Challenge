@@ -21,6 +21,7 @@ import {
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import useDocuments from './src/hooks/useDocuments';
+import ListDocument from './src/Components/ListDocument';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -36,13 +37,17 @@ const App: () => Node = () => {
     callApi("documents")
   }
 
+  const hasDocuments = documents ? true : false
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle} />
-      <Button onPress={handleButton} title="fetchData"></Button>
+        style={backgroundStyle} >
+        {hasDocuments && <ListDocument documents={documents}></ListDocument>}
+
+        <Button onPress={handleButton} title="fetchData"></Button>
+      </ScrollView>
     </SafeAreaView>
   );
 };
