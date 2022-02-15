@@ -28,7 +28,7 @@ const useDocuments = () => {
         }
       })
         .catch(err => {
-          console.log(err.message)
+          console.log(err)
           setError(err.message);
         });
     }
