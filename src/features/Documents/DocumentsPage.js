@@ -8,7 +8,7 @@ import Svg, { Path } from "react-native-svg"
 function DocumentsPage(props) {
 
     const documents = props.documents
-    const [mode, setMode] = useState("GRID");
+    const [mode, setMode] = useState("LIST");
 
     const callbackSwitch = (mode) => {
         setMode(mode)
