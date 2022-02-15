@@ -46,6 +46,9 @@ export default function Header(props) {
 
         <View style={styles.bellButton}>
             <Bell width={30} height={30} strokeWidth={3} stroke="black"></Bell>
+            <View style={styles.badge}>
+                <Text style={styles.textBadge}>{notifications.length}</Text>
+            </View>
         </View>
     </View>
 
@@ -64,12 +67,27 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     bellButton: {
+        paddingStart: 5,
+        paddingTop: 5,
         borderRadius: 5,
         borderColor: 'whitesmoke',
         borderWidth: 1,
         alignSelf: 'center',
-        width: 35,
-        height: 35
+        width: 40,
+        height: 40,
+        flexDirection: 'row'
+    },
+    badge: {
+        backgroundColor: "#4169e1",
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        marginStart: -10
+    },
+    textBadge: {
+        fontSize: 8,
+        color: 'white',
+        alignSelf: 'center'
     }
 })
 
