@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Node } from 'react';
 import {
   Button,
@@ -23,6 +23,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import useDocuments from './src/hooks/useDocuments';
 import DocumentsPage from './src/features/Documents/DocumentsPage';
 import Header from './src/features/Header/Header';
+import AddDocument from './src/Components/AddDocument';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -31,11 +32,18 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+
   const { documents, error, callApi } = useDocuments();
+  const [isAddPage, setAddPage] = useState(false)
   console.log("newDocuments:", documents);
+  useEffect(() => {
+    if (documents == null) {
+      callApi("documents")
+    }
+  })
 
   const handleButton = () => {
-    callApi("documents")
+    setAddPage(true)
   }
 
   const hasDocuments = documents ? true : false
@@ -43,34 +51,15 @@ const App: () => Node = () => {
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Header></Header>
+      <AddDocument isAddPage={isAddPage} onPressBack={() => setAddPage(false)} />
       <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle} >
+        contentInsetAdjustmentBehavior="automatic">
         {hasDocuments && <DocumentsPage documents={documents}></DocumentsPage>}
 
-        <Button onPress={handleButton} title="fetchData"></Button>
+        <Button onPress={handleButton} title="+ Add document"></Button>
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
