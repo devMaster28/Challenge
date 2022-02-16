@@ -13,19 +13,21 @@ export default function IconSwitch(props) {
 
     return <View style={style.container}>
 
-        <View style={{ width: '50%', height: "100%", backgroundColor: type == "LIST" ? 'white' : 'whitesmoke' }}>
-            <TouchableNativeFeedback onPress={() => onclick("LIST")} >
-                <ListIcon width="50%" height="50%" strokeWidth={2} stroke="blue" style={{ alignSelf: 'center' }} />
-            </TouchableNativeFeedback>
-        </View>
+        <TouchableNativeFeedback onPress={() => onclick("LIST")} >
+            <View style={{ width: '50%', backgroundColor: type == "LIST" ? 'white' : 'whitesmoke', borderTopStartRadius: 20, borderBottomStartRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
+                <ListIcon width="50%" height="50%" strokeWidth={2} stroke={type == "LIST" ? "blue" : "black"} />
+            </View>
+        </TouchableNativeFeedback>
 
-        <View style={{ width: '50%', height: "100%", backgroundColor: type == "GRID" ? 'white' : 'whitesmoke' }}>
-            <TouchableNativeFeedback onPress={() => onclick("GRID")} >
-                <GridIcon width="50%" height="50%" strokeWidth={2} stroke="black" style={{ alignSelf: 'center' }} />
-            </TouchableNativeFeedback>
-        </View>
+        <TouchableNativeFeedback onPress={() => onclick("GRID")} >
 
-    </View>
+            <View style={{ width: '50%', height: "100%", borderTopEndRadius: 20, borderBottomEndRadius: 20, backgroundColor: type == "GRID" ? 'white' : 'whitesmoke', alignItems: 'center', justifyContent: 'center' }}>
+                <GridIcon width="50%" height="50%" strokeWidth={2} stroke={type == "GRID" ? "blue" : "black"} />
+            </View>
+        </TouchableNativeFeedback >
+
+
+    </View >
 
 }
 
@@ -36,7 +38,9 @@ const style = StyleSheet.create({
         height: 50,
         elevation: 2,
         flexDirection: 'row',
-        borderRadius: 5,
+        borderRadius: 20,
+        borderColor: 'whitesmoke',
+        borderWidth: 1
     }
 })
 

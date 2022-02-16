@@ -29,6 +29,7 @@ const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
+    flex: 1,
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
@@ -52,14 +53,25 @@ const App: () => Node = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Header></Header>
       <AddDocument isAddPage={isAddPage} onPressBack={() => setAddPage(false)} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic">
+      <ScrollView style={{ width: '100%', height: '100%' }}>
         {hasDocuments && <DocumentsPage documents={documents}></DocumentsPage>}
 
-        <Button onPress={handleButton} title="+ Add document"></Button>
       </ScrollView>
+      <View style={styles.addDocument}>
+        <Button onPress={handleButton} title="+ Add document"></Button>
+      </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  addDocument: {
+    bottom: 0,
+    marginTop: 20,
+    marginBottom: 10,
+    marginHorizontal: 10,
+
+  }
+})
 
 export default App;

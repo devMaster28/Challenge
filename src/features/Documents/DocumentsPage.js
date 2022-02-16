@@ -17,16 +17,11 @@ function DocumentsPage(props) {
     return (
         <View style={styles.container}>
             <View style={styles.btnsContainer}>
-                <Button title="text"></Button>
                 <View style={{ flexGrow: 2 }}></View>
                 <IconSwitch callback={callbackSwitch}></IconSwitch>
             </View>
-            {
-                mode == "LIST" && <ListDocument documents={documents}></ListDocument>
-            }
-            {
-                mode == "GRID" && <GridView documents={documents}></GridView>
-            }
+            {mode == "LIST" && <ListDocument documents={documents}></ListDocument>}
+            {mode == "GRID" && <GridView documents={documents}></GridView>}
         </View>
 
     )
