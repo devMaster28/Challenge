@@ -14,13 +14,15 @@ To be able to use SVG
 
 ## Preconditions
 
-####  sdk  31
+####  sdk  31 
 The reason is because the Notification dependency works on a higher sdk 
 
 ####  Listen the 8081 port
 adb reverse tcp:8080 tcp:8080
 
 the fetch peticion doesnt allow to fetch 
+
+#### Run on Android
 
 ## Notes
 
